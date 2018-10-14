@@ -7,5 +7,8 @@ extends CrudRepository<InvertedIndex, Long>
 {
 	
 	public void deleteByDocument(long document);
+	public Iterable<InvertedIndex> findByDocument(long document);
+	public Iterable<InvertedIndex> findByTerm(String term);
+	public long countByTerm(String term);
 
 }

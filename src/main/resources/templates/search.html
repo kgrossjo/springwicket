@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search Documents</title>
+</head>
+<body>
+
+	<h1>Search Documents</h1>
+	
+	<form action="/search" method="POST">
+		<input type="text" name="query" th:value="${query}">
+		<input type="submit" value="Search">
+	</form>
+	
+	<ol>
+		<li th:each="x : ${result}">
+			<a href="/" th:href="@{/documents/edit(id=${x.document})}"> 
+				<span th:text="${x.document}"></span>
+			</a>
+			(<span th:text="${x.score}"></span>)
+			<span th:text="${x.title}"></span>
+		</li>
+	</ol>
+	
+	<p>
+		<a href="/documents">Go back</a>
+		to the list of documents.
+	</p>
+
+</body>
+</html>
