@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add a New Document</title>
+</head>
+<body>
+
+	<h1>Add a New Document</h1>
+	
+	<form action="/documents/add" method="POST">
+		<dl>
+			<dt><label for="title">Title</label></dt>
+			<dd><input type="text" name="title"></dd>
+			
+			<dt><label for="content">Content</label></dt>
+			<dd><textarea rows="5" cols="80" name="content"></textarea>
+		</dl>
+	</form>
+</body>
+</html>
