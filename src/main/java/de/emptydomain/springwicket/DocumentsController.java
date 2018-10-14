@@ -25,6 +25,33 @@ public class DocumentsController {
 		return "documents";
 	}
 	
+	@GetMapping("/documents/edit")
+	public String document(
+			@RequestParam(name="id", required=true) String id,
+			Model model
+	) {
+		Long idNumeric = Long.valueOf(id);
+		Document d = this.documentRepository.findById(idNumeric).get();
+		model.addAttribute("document", d);
+		return "document";
+	}
+	
+	@PostMapping("/documents/edit")
+	public ModelAndView editDocument(
+			@RequestParam(name="id", required=true) String id,
+			@RequestParam(name="title", required=true) String title,
+			@RequestParam(name="content", required=true) String content,
+			Model model
+	) {
+		Long idNumeric = Long.valueOf(id);
+		Document d = this.documentRepository.findById(idNumeric).get();
+		d.setTitle(title);
+		d.setContent(content);
+		d = this.documentRepository.save(d);
+		this.documentRepository.updateIndex(d);
+		return new ModelAndView("redirect:/documents");
+	}
+	
 	@GetMapping("/documents/new")
 	public String newDocument(Model model)
 	{
