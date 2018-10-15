@@ -28,7 +28,8 @@ took me two or three hours to overcome this road block.
 From then on, it was fairly smooth sailing.
 
 I switched back and forth between different tutorials and reading various
-API descriptions, and the Thymeleaf documentation.
+API descriptions, and the Thymeleaf documentation.  At the end, I added
+a bit of UI polish using Bootstrap and learned about "webjars".
 
 The whole thing took maybe 10 or 15 hours.
 
