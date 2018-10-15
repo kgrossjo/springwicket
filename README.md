@@ -3,7 +3,7 @@
 The project name is a misnomer, there is no Apache Wicket in it (yet?).
 
 I'm trying to learn how to develop a web application in Java using
-some standard modern framework.
+some standard modern framework, and also using new Java APIs.
 
 Originally, I wanted to create a web app using Apache Wicket.  Then I
 discovered that Wicket only does the views but I needed controllers
@@ -27,11 +27,16 @@ took me two or three hours to overcome this road block.
 
 From then on, it was fairly smooth sailing.
 
-I switched back and forth between different tutorials and reading various
-API descriptions, and the Thymeleaf documentation.  At the end, I added
-a bit of UI polish using Bootstrap and learned about "webjars".
+I switched back and forth between different tutorials and reading various 
+API descriptions, and the Thymeleaf documentation.  Then, I added a bit of
+UI polish using Bootstrap and learned about "webjars".
 
-The whole thing took maybe 10 or 15 hours.
+And finally, I looked at the code and tried to see which code might be
+better suited to be expressed in a functional style (stream processing).
+Quite possible I've gone a bit overboard with this.  The longest stream
+is less than ten lines of code, though, so maybe it's still okay.
+
+The whole thing took maybe 15 or 20 hours.
 
 ## What does the app do?
 
