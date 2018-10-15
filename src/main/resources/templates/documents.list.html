@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>List of Documents</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="/webjars/bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
+	<link href="/springwicket.css" rel="stylesheet">
+	<title>List of Documents</title>
 </head>
 <body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">Spring Wicket</a>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/documents">Documents <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/search">Search</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/documents/add">Add Document</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 	<h1>List of Documents</h1>
 	
@@ -13,19 +33,23 @@
 		for documents.
 	</p>
 
-	<table>
-		<tr>
-			<th>Edit</th>
-			<th>ID</th>
-			<th>Title</th>
-			<th>Content</th>
-		</tr>
-		<tr th:each="d : ${documents}">
-			<td><a href="/" th:href="@{/documents/edit(id=${d.id})}">Edit</a></td>
-			<td th:text="${d.id}">00</td>
-			<td th:text="${d.title}">Title</td>
-			<td th:text="${d.content}">Content</td>
-		</tr>
+	<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Edit</th>
+				<th scope="col">ID</th>
+				<th scope="col">Title</th>
+				<th scope="col">Content</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="d : ${documents}">
+				<td><a href="/" th:href="@{/documents/edit(id=${d.id})}">Edit</a></td>
+				<td th:text="${d.id}">00</td>
+				<td th:text="${d.title}">Title</td>
+				<td th:text="${d.content}">Content</td>
+			</tr>
+		</tbody>
 	</table>
 	
 	<p>
@@ -33,5 +57,8 @@
 		a new document
 	</p>
 
+	<script src="/webjars/jquery/3.0.0/jquery.js"></script>
+	<script src="/webjars/popper.js"></script>
+	<script src="/webjars/bootstrap/4.1.3/js/bootstrap.js"></script>
 </body>
 </html>
