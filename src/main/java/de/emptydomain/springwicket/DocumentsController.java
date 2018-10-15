@@ -18,7 +18,7 @@ import de.emptydomain.springwicket.db.Document;
 import de.emptydomain.springwicket.db.DocumentRepository;
 import de.emptydomain.springwicket.db.InvertedIndex;
 import de.emptydomain.springwicket.db.InvertedIndexRepository;
-import de.emptydomain.springwicket.helper.SearchResult;;
+import de.emptydomain.springwicket.helper.SearchResult;
 import de.emptydomain.springwicket.helper.TextHelper;
 
 @Controller
