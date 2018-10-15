@@ -104,7 +104,7 @@ public class DocumentsController {
 	{
 		model.addAttribute("query", query);
 
-		Map<String, Integer> queryWords = TextHelper.indexText(query);
+		Map<String, Long> queryWords = TextHelper.indexText(query);
 
 		Map<String, Long> documentFrequency = new HashMap<>();
 		for (String w : queryWords.keySet()) {

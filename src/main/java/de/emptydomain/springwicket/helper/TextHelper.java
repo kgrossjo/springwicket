@@ -1,51 +1,28 @@
 package de.emptydomain.springwicket.helper;
 
-import java.util.ArrayList;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class TextHelper {
 
-	public static Map<String, Integer> indexText(String completeText) {
-		List<String> stems = splitTextIntoWords(completeText).stream()
-				.map(String::toLowerCase)
-				.map(Stemming::stem)
-				.collect(Collectors.toList());
-		Map<String, Integer> wordCounts = countWords(stems);
-		return wordCounts;
-	}
-
 	private static final Pattern WORD_SPLIT = Pattern.compile("[.,?! ]+");
 
-	private static Collection<String> splitTextIntoWords(String text)
-	{
-		Collection<String> result = new LinkedList<String>();
-		String[] words = WORD_SPLIT.split(text);
-		for (String w : words) {
-			result.add(w.strip()	);
-		}
-		return result;
-	}
-
-	private static Map<String, Integer> countWords(Collection<String> words)
-	{
-		// I guess there is a streams API that does this, but the code
-		// is short enough, I'm not having too much pain.
-		// Maybe Collectors.groupingBy is the answer?
-		Map<String, Integer> result = new HashMap<String, Integer>();
-		for (String w : words) {
-			if (! result.containsKey(w)) {
-				result.put(w, Integer.valueOf(0));
-			}
-			result.put(w, Integer.valueOf(1 + result.get(w)));
-		}
-		return result;
+	public static Map<String, Long> indexText(String completeText) {
+		// This is an exercise in stream processing.  I feel this
+		// mostly reads quite nicely, the only slightly difficult part
+		// is the collection phase.
+		// I converted the original procedural code to this functional
+		// style only after adding some unit tests for the `indexText`
+		// method.  This way I could be sure that I didn't mess it up.
+		return WORD_SPLIT.splitAsStream(completeText)	// split into words
+			.map(String::strip)							// strip whitespace off each word
+			.map(String::toLowerCase)					// convert to lower case
+			.map(Stemming::stem)							// apply stemming
+			.collect(Collectors.groupingBy(				// count the resulting words
+				Function.identity(),
+				Collectors.counting()));
 	}
 
 }

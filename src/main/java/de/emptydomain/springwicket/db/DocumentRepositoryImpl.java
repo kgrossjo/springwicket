@@ -20,18 +20,18 @@ public class DocumentRepositoryImpl implements DocumentRepositoryCustom {
 	public void updateIndex(Document d) {
 		this.invertedIndexRepository.deleteByDocument(d.getId());
 		String completeText = d.getTitle() + " " + d.getContent();
-		Map<String, Integer> wordCounts = TextHelper.indexText(completeText);
+		Map<String, Long> wordCounts = TextHelper.indexText(completeText);
 		this.saveWordCounts(d, wordCounts);
 	}
 
-	private void saveWordCounts(Document d, Map<String, Integer> wordCounts) 
+	private void saveWordCounts(Document d, Map<String, Long> wordCounts) 
 	{
 		long docid = d.getId();
 		wordCounts.forEach((w, c) -> {
 			InvertedIndex x = new InvertedIndex();
 			x.setDocument(docid);
 			x.setTerm(w);
-			x.setCount(c);
+			x.setCount(c.intValue());
 			this.invertedIndexRepository.save(x);
 		});
 	}
