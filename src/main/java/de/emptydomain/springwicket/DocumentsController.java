@@ -42,6 +42,8 @@ public class DocumentsController {
 			@RequestParam(name="id", required=true) String id,
 			Model model
 	) {
+		// This will barf if the id is not a number, we'll let the 
+		// default error handling take over for that.
 		Long idNumeric = Long.valueOf(id);
 		Document d = this.documentRepository.findById(idNumeric).get();
 		model.addAttribute("document", d);
@@ -55,6 +57,7 @@ public class DocumentsController {
 			@RequestParam(name="content", required=true) String content,
 			Model model
 	) {
+		// I guess this will barf if not a number.
 		Long idNumeric = Long.valueOf(id);
 		Document d = this.documentRepository.findById(idNumeric).get();
 		d.setTitle(title);
