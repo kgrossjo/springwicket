@@ -27,14 +27,13 @@ public class DocumentRepositoryImpl implements DocumentRepositoryCustom {
 	private void saveWordCounts(Document d, Map<String, Integer> wordCounts) 
 	{
 		long docid = d.getId();
-		for (String w : wordCounts.keySet()) {
-			Integer c = wordCounts.get(w);
+		wordCounts.forEach((w, c) -> {
 			InvertedIndex x = new InvertedIndex();
 			x.setDocument(docid);
 			x.setTerm(w);
 			x.setCount(c);
 			this.invertedIndexRepository.save(x);
-		}
+		});
 	}
 
 }
