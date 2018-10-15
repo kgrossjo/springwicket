@@ -1,21 +1,23 @@
 package de.emptydomain.springwicket.helper;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import org.tartarus.martin.Stemmer;
+import java.util.stream.Collectors;
 
 public class TextHelper {
 
 	public static Map<String, Integer> indexText(String completeText) {
-		Collection<String> words = splitTextIntoWords(completeText);
-		words = lowercaseWords(words);
-		words = stemWords(words);
-		Map<String, Integer> wordCounts = countWords(words);
+		List<String> stems = splitTextIntoWords(completeText).stream()
+				.map(String::toLowerCase)
+				.map(Stemming::stem)
+				.collect(Collectors.toList());
+		Map<String, Integer> wordCounts = countWords(stems);
 		return wordCounts;
 	}
 
@@ -27,38 +29,6 @@ public class TextHelper {
 		String[] words = WORD_SPLIT.split(text);
 		for (String w : words) {
 			result.add(w.strip()	);
-		}
-		return result;
-	}
-	
-	private static Collection<String> lowercaseWords(Collection<String> words)
-	{
-		return words.stream().map(String::toLowerCase).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-		/*
-		Collection<String> result = new LinkedList<String>();
-		for (String w : words) {
-			result.add(w.toLowerCase());
-		}
-		return result;
-		*/
-	}
-
-	private static Collection<String> stemWords(Collection<String> words)
-	{
-		Collection<String> result = new LinkedList<String>();
-		for (String w : words) {
-			// The API for the Stemmer class is a bit weird.
-			// But it's the official implementation...
-			// We have to create a new stemmer, then add 
-			// a word to it, then call stem, then you can 
-			// retrieve the stem via toString.
-			// Actually, maybe we don't need a new stemmer
-			// for each word, but I don't want to risk it.
-			Stemmer stemmer = new Stemmer();
-			char[] cs = w.toCharArray();
-			stemmer.add(cs, cs.length);
-			stemmer.stem();
-			result.add(stemmer.toString());
 		}
 		return result;
 	}
