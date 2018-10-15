@@ -4,7 +4,7 @@ public class SearchResult implements Comparable<SearchResult> {
 	private long document;
 	private double score;
 	private String title;
-
+	
 	public long getDocument() {
 		return document;
 	}
